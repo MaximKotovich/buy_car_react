@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Suspense} from 'react';
 import './App.scss';
+import {SpinnerComponent} from "./common/spiner/spinnerComponent";
+import {useSelector} from "react-redux";
+import {RootState} from "./store/reducers";
+import {LoginPage} from "./pages/login-page/login.page";
+
 
 function App() {
+
+  const user = useSelector((state: RootState) => state.userReducer.user)
+
+
+  if (!user) {
+    return (
+        <Suspense fallback={<SpinnerComponent/>}>
+          <LoginPage/>
+        </Suspense>
+    )
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
     </div>
   );
 }
