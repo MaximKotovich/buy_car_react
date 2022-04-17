@@ -1,0 +1,2 @@
+export const SET_ALL_PETS = "SET_ALL_PETS"
+export const GET_ALL_PETS_REQUEST = "GET_ALL_PETS_REQUEST"

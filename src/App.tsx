@@ -1,27 +1,50 @@
-import React, {Suspense} from 'react';
+import React, {Suspense, useMemo} from 'react';
 import './App.scss';
 import {SpinnerComponent} from "./common/spiner/spinnerComponent";
 import {useSelector} from "react-redux";
 import {RootState} from "./store/reducers";
-import {LoginPage} from "./pages/login-page/login.page";
+import {LoginPage} from "./pages/login/login.page";
+import {Navigate, Route, Routes} from 'react-router-dom';
+import {HomePage} from "./pages/home/home.page";
+import {HeaderComponent} from "./common/components/header.component/header.component";
+import {NavBarComponent} from "./common/components/nav-bar.component/nav-bar.component";
 
 
 function App() {
 
-  const user = useSelector((state: RootState) => state.userReducer.user)
+    const loading = useSelector((state: RootState) => state.userReducer.loading)
+    const openBurger = useSelector((state: RootState) => state.burgerMenuReducer.openBurger)
 
 
-  if (!user) {
+    const header = useMemo(() => {
+        return <HeaderComponent/>
+    }, [])
+
+    if (loading) {
+        return <SpinnerComponent/>
+    }
+
     return (
-        <Suspense fallback={<SpinnerComponent/>}>
-          <LoginPage/>
-        </Suspense>
-    )
-  }
-  return (
-    <div className="App">
-    </div>
-  );
+        <div className="App">
+            <LoginPage/>
+            <div className='wrapper'>
+                {header}
+                <div className={openBurger ? 'burger-menu active-nav-bar' : 'burger-menu'}>
+                    <NavBarComponent/>
+                </div>
+
+                <div className='container'>
+                    <Suspense fallback={<SpinnerComponent/>}>
+                        <Routes>
+                            <Route path="/" element={<Navigate to="/home" replace/>}/>
+                            <Route path="/home" element={<HomePage/>}/>
+                            <Route path="/login" element={<LoginPage/>}/>
+                        </Routes>
+                    </Suspense>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default App;

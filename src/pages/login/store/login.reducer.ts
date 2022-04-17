@@ -1,10 +1,11 @@
-import { GET_TOKEN } from "./login.action"
+import {GET_TOKEN, OPEN_CLOSE_LOGIN_PAGE} from "./login.action"
 import {getToken} from "../utils/token.service";
 
 
 const initialState = {
     user: getToken()?.login,
-    loading: false
+    loading: false,
+    isOpen: false
 }
 
 
@@ -14,6 +15,12 @@ export const userReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 user: getToken().login,
+            }
+        }
+        case OPEN_CLOSE_LOGIN_PAGE: {
+            return {
+                ...state,
+                isOpen: action.payload,
             }
         }
 

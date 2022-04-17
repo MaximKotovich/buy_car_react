@@ -1,0 +1,28 @@
+
+.text-on-header {
+  padding: 12px;
+  transition: all 0.3s;
+
+  &:hover{
+    background-color: #11A8B6;
+  }
+}
+
+.sign-in-button {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 7px;
+  background-color: #63cbad;
+  cursor: pointer;
+}
+
+.avatar {
+  border-radius: 50%;
+  margin: 5px;
+
+}
+
+
+
+
+
