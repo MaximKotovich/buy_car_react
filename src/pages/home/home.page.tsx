@@ -1,4 +1,4 @@
-import {Card, CardContent, CardMedia, Collapse, Typography} from "@mui/material";
+import {Card, CardContent, Collapse, Typography} from "@mui/material";
 import React from "react";
 import "./home.page.scss"
 import dog1 from "../../images/dog1.webp"

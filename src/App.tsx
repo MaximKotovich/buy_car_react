@@ -8,6 +8,8 @@ import {Navigate, Route, Routes} from 'react-router-dom';
 import {HomePage} from "./pages/home/home.page";
 import {HeaderComponent} from "./common/components/header.component/header.component";
 import {NavBarComponent} from "./common/components/nav-bar.component/nav-bar.component";
+import {RegistrationPage} from "./pages/registration/registration.page";
+import {useTheme} from "./common/custom-hooks/theme.hook";
 
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
     const loading = useSelector((state: RootState) => state.userReducer.loading)
     const openBurger = useSelector((state: RootState) => state.burgerMenuReducer.openBurger)
 
+    const {theme, setTheme} = useTheme()
 
     const header = useMemo(() => {
         return <HeaderComponent/>
@@ -25,22 +28,24 @@ function App() {
     }
 
     return (
-        <div className="App">
+        <div className='App'>
             <LoginPage/>
             <div className='wrapper'>
                 {header}
                 <div className={openBurger ? 'burger-menu active-nav-bar' : 'burger-menu'}>
-                    <NavBarComponent/>
+                    <NavBarComponent />
                 </div>
 
                 <div className='container'>
-                    <Suspense fallback={<SpinnerComponent/>}>
-                        <Routes>
-                            <Route path="/" element={<Navigate to="/home" replace/>}/>
-                            <Route path="/home" element={<HomePage/>}/>
-                            <Route path="/login" element={<LoginPage/>}/>
-                        </Routes>
-                    </Suspense>
+                    <div className='content'>
+                        <Suspense fallback={<SpinnerComponent/>}>
+                            <Routes>
+                                <Route path="/" element={<Navigate to="/home" replace/>}/>
+                                <Route path="/home" element={<HomePage/>}/>
+                                <Route path="/registration" element={<RegistrationPage/>}/>
+                            </Routes>
+                        </Suspense>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,46 @@
+.registration {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .registration-content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 50%;
+
+    .phone-number{
+      display: flex;
+      font-size: 36px;
+      align-items: center;
+      .mobile-phone{
+        flex: 1;
+      }
+    }
+    .registration-text-field {
+      margin: 10px;
+
+      .MuiInputLabel-root.Mui-focused {
+        color: #ffca63;
+      }
+
+      .Mui-focused {
+        > .MuiOutlinedInput-notchedOutline {
+          border-color: #FAD690;
+        }
+      }
+
+
+      & .label.Mui-focused {
+        color: #FAD690;
+      }
+    }
+  }
+
+  @media (max-width: 560px) {
+    .registration-content {
+      width: 100%;
+    }
+  }
+
+}
