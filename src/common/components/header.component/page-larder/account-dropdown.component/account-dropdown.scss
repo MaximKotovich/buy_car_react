@@ -1,0 +1,41 @@
+.drop-down-window {
+  overflow: visible;
+  margin-top: 1.5px;
+
+  &.MuiAvatar-root {
+    width: 32px;
+    height: 32px;
+    margin-left: -0.5px;
+    margin-right: 1px;
+
+  }
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 14px;
+    width: 10px;
+    height: 10px;
+    transform: translateY(-50%) rotate(45deg);
+    z-index: 0;
+  }
+
+  .MuiPaper-root {
+    background-color: var(--header-background-color);
+    color: var(--header-text-color);
+
+    li:hover {
+      background-color: var(--account-menu-hover);
+    }
+
+    svg {
+      color: var(--header-text-color);
+    }
+
+    hr {
+      color: var(--header-text-color);
+    }
+  }
+}

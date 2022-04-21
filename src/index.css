@@ -1,6 +1,7 @@
 html[data-theme='dark'] {
     --header-text-color: #ffffff;
     --header-background-color: #000000;
+    --account-menu-hover: gray;
     /*--button-border-color: #ba8fc2;*/
 
     /*--input-text-color: #ffffff;*/
@@ -15,6 +16,7 @@ html[data-theme='dark'] {
 html[data-theme='light'] {
     --header-text-color: #252525;
     --header-background-color: #FAD690;
+    --account-menu-hover: rgba(119, 118, 118, 0.32);
     /*--button-border-color: #4e005c;*/
 
     /*--input-text-color: #252525;*/

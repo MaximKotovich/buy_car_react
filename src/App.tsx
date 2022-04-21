@@ -1,23 +1,24 @@
-import React, {Suspense, useMemo} from 'react';
+import React, {Suspense, useMemo, lazy} from 'react';
 import './App.scss';
 import {SpinnerComponent} from "./common/spiner/spinnerComponent";
 import {useSelector} from "react-redux";
 import {RootState} from "./store/reducers";
 import {LoginPage} from "./pages/login/login.page";
 import {Navigate, Route, Routes} from 'react-router-dom';
-import {HomePage} from "./pages/home/home.page";
+// import {HomePage} from "./pages/home/home.page";
 import {HeaderComponent} from "./common/components/header.component/header.component";
-import {NavBarComponent} from "./common/components/nav-bar.component/nav-bar.component";
+import {NavBarComponent} from "./common/components/header.component/page-larder/nav-bar.component/nav-bar.component";
 import {RegistrationPage} from "./pages/registration/registration.page";
-import {useTheme} from "./common/custom-hooks/theme.hook";
+
+
+const HomePage = lazy((): ReturnType<any> => import('./pages/home/home.page'))
+const CreatePostPage = lazy((): ReturnType<any> => import('./pages/create-post/create-post.component'))
 
 
 function App() {
 
     const loading = useSelector((state: RootState) => state.userReducer.loading)
     const openBurger = useSelector((state: RootState) => state.burgerMenuReducer.openBurger)
-
-    const {theme, setTheme} = useTheme()
 
     const header = useMemo(() => {
         return <HeaderComponent/>
@@ -43,6 +44,7 @@ function App() {
                                 <Route path="/" element={<Navigate to="/home" replace/>}/>
                                 <Route path="/home" element={<HomePage/>}/>
                                 <Route path="/registration" element={<RegistrationPage/>}/>
+                                <Route path="/create-found-post" element={<CreatePostPage/>}/>
                             </Routes>
                         </Suspense>
                     </div>

@@ -1,12 +1,11 @@
 import {Link} from "react-router-dom";
-import {Button} from "@mui/material";
-import {AvatarImage} from "../avatar-image.component/avatar-image.component";
-import {OPEN_CLOSE_LOGIN_PAGE} from "../../../pages/login/store/login.action";
+import {OPEN_CLOSE_LOGIN_PAGE} from "../../../../../pages/login/store/login.action";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../store/reducers";
+import {RootState} from "../../../../../store/reducers";
 import './nav-bar.component.scss'
-import {SET_OPEN_BURGER_MENU} from "../header.component/store/burger-menu.reducer";
+import {SET_OPEN_BURGER_MENU} from "../../store/burger-menu.reducer";
+import {AddPostDropdown} from "../add-post-dropdown/add-post.dropdown";
 
 export const NavBarComponent = () => {
     const user = useSelector((state: RootState) => state.userReducer.user)
@@ -31,8 +30,11 @@ export const NavBarComponent = () => {
             <Link to="/tasksBoard">
                 <p className='text-on-header' onClick={closeBurgerMenu}>TASKS</p>
             </Link>
+                <p className='text-on-header' ><AddPostDropdown closeBurgerMenu={closeBurgerMenu}/></p>
             {user
-                ? <div className='avatar'><AvatarImage user={user}/></div>
+                ? <Link to="/create-post">
+                    <p className='text-on-header' onClick={closeBurgerMenu}>ADD POST</p>
+                </Link>
                 : <div className='button-block-autorize-registr'>
                     <p className='sign-in-button'
                        onClick={() => dispatch({type: OPEN_CLOSE_LOGIN_PAGE, payload: true})}>

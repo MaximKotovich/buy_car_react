@@ -7,7 +7,7 @@ import dog3 from "../../images/dog2.webp"
 import dog4 from "../../images/dog1.webp"
 import dog5 from "../../images/dog2.webp"
 
-export const HomePage = () => {
+const HomePage = () => {
     const arr = [dog1, dog2, dog3, dog4, dog5]
     return (
         <div className='home-content'>
@@ -64,3 +64,5 @@ export const HomePage = () => {
 
     )
 }
+
+export default HomePage

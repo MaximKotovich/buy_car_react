@@ -2,19 +2,20 @@ import React, {useEffect, useState} from "react";
 import "./header.component.scss"
 
 import PetsIcon from '@mui/icons-material/Pets';
-import {NavBarComponent} from "../nav-bar.component/nav-bar.component";
+import {NavBarComponent} from "./page-larder/nav-bar.component/nav-bar.component";
 import MenuIcon from '@mui/icons-material/Menu';
 import {useDispatch, useSelector} from "react-redux";
 import {SET_OPEN_BURGER_MENU} from "./store/burger-menu.reducer";
 import {RootState} from "../../../store/reducers";
-import {useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import {useTheme} from "../../custom-hooks/theme.hook";
-import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import {AccountDropdownComponent} from "./page-larder/account-dropdown.component/account-dropdown.component";
+
 
 
 export const HeaderComponent = () => {
     const openBurger = useSelector((state: RootState) => state.burgerMenuReducer.openBurger)
+    const user = useSelector((state: RootState) => state.userReducer.user)
 
     const dispatch = useDispatch()
     const history = useNavigate();
@@ -37,12 +38,18 @@ export const HeaderComponent = () => {
                     <div className='logo'>
                         <p onClick={liknToHome}>HAPPY PET</p><PetsIcon></PetsIcon>
                     </div>
-                    <div className='dekstop-menu'>
+                    <div className='desktop-menu'>
                         <NavBarComponent/>
                     </div>
                     <div className='mobile-menu'>
-                        <MenuIcon className='burger-menu-icon'onClick={() => dispatch({type: SET_OPEN_BURGER_MENU, payload: !openBurger})}/>
+                        <MenuIcon className='burger-menu-icon'
+                                  onClick={() => dispatch({type: SET_OPEN_BURGER_MENU, payload: !openBurger})}/>
                     </div>
+                    {user &&
+                        <AccountDropdownComponent
+                            user='Maxim'
+                        />
+                    }
                     <label className="checkbox-ios">
                         <input type="checkbox" onChange={(e) => setChecked(!checked)
                         } checked={checked}/>

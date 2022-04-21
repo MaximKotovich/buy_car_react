@@ -24,7 +24,8 @@ export const AvatarImage = ({ user }: any) => {
             sx: {
                 bgcolor: stringToColor(name),
                 height: '30px',
-                width: '30px'
+                width: '30px',
+                cursor: 'pointer'
             },
             children: (name.includes(' ')) ? `${name.split(' ')[0][0]}${name.split(' ')[1][0]}` : `${name[0]}`
         }
