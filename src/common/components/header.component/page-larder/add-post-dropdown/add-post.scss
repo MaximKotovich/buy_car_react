@@ -1,6 +1,5 @@
 
-.add-task{
-  //color: var(--header-text-color)
+.add-task {
   cursor: pointer;
 }
 
@@ -8,11 +7,14 @@
   overflow: visible;
   margin-top: 1.5px;
 
+
   &.MuiAvatar-root {
     width: 32px;
     height: 32px;
     margin-left: -0.5px;
     margin-right: 1px;
+    color: var(--header-text-color);
+
 
   }
 
@@ -30,18 +32,13 @@
 
   .MuiPaper-root {
     background-color: var(--header-background-color);
-    color: var(--header-text-color);
+
+    a {
+      color: var(--header-text-color);
+    }
 
     li:hover {
       background-color: var(--account-menu-hover);
-    }
-
-    svg {
-      color: var(--header-text-color);
-    }
-
-    hr {
-      color: var(--header-text-color);
     }
   }
 }

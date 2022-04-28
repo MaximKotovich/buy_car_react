@@ -34,12 +34,12 @@ export const AddPostDropdown = ({closeBurgerMenu}:any) => {
                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
             >
                 <MenuItem onClick={closeBurgerMenu}>
-                    <Link to="/create-finding-post">
+                    <Link to="/create-post/create-finding-post">
                         Finding
                     </Link>
                 </MenuItem>
                 <MenuItem onClick={closeBurgerMenu}>
-                    <Link to="/create-found-post">
+                    <Link to="/create-post/create-found-post">
                         Found
                     </Link>
                 </MenuItem>
