@@ -1,12 +1,11 @@
 import React, {useState} from 'react'
-import {FileUploader} from "react-drag-drop-files";
-import uploadImage from '../../images/upload.png'
 import './create-post.scss'
-import ClearIcon from '@mui/icons-material/Clear';
-import {Button, Checkbox, FormControl, FormControlLabel, InputLabel, Select, TextField} from "@mui/material";
+import {Button, FormControl, InputLabel, Select, TextField} from "@mui/material";
 import {Controller, useForm} from 'react-hook-form';
 import MenuItem from "@mui/material/MenuItem";
 import {areas, ICities} from "../../common/areas-json/by-cities";
+import {UploadPhoto} from "./components/upload-photo/upload-photo.component";
+import {SelectColorComponent} from "./components/select-color/select-color.component";
 
 
 const ITEM_HEIGHT = 48;
@@ -20,23 +19,16 @@ const MenuProps = {
     },
 };
 
-const CreatePostComponent = () => {
+interface IProps {
+    finding:boolean
+}
 
-    const [preview, setPreview] = useState<string[]>([])
+const CreatePostComponent = ({finding}:IProps) => {
+
     const [regionsArea, setRegionsArea] = useState<ICities[]>()
-    const [checked, setChecked] = useState(true)
-    const {control, handleSubmit, register, watch} = useForm()
-    const getFile = (files: any) => {
-        let photosForPreview = Object.keys(files).map((key) => {
-            return URL.createObjectURL(files[key])
-        })
-        setPreview([...preview, ...photosForPreview])
-        const formData = new FormData()
-        Object.keys(files).forEach((key) => {
-            formData.append('files', files[key])
+    const [petColor, setPetColor] = useState<string>()
+    const {control, handleSubmit, register} = useForm()
 
-        })
-    }
 
     const selectArea = (selected: any) => {
         setRegionsArea(selected?.cities)
@@ -82,6 +74,12 @@ const CreatePostComponent = () => {
             </div>
             <div className='enter-info-block'>
                 <p>About Pet</p>
+                {finding && <TextField className="inputs-for-create-post"
+                            id="outlined-basic"
+                            label='Pet name'
+                            variant="outlined"
+                            {...register('pet-name')}
+                />}
                 <div className='pet-info'>
                     <FormControl className='info-pet inputs-for-create-post'>
                         <InputLabel variant='outlined'>Type</InputLabel>
@@ -125,10 +123,7 @@ const CreatePostComponent = () => {
                 </div>
                 <div className='pet-color'>
                     <p>Color</p>
-                    <input type="color"
-                           defaultValue="#e66465"
-                           {...register('color')}
-                    />
+                    <SelectColorComponent petColor={petColor} setPetColor={setPetColor}/>
                 </div>
             </div>
             <div className='enter-info-block'>
@@ -195,32 +190,9 @@ const CreatePostComponent = () => {
                 />
             </div>
             <div className='upload-block'>
-                <FileUploader handleChange={getFile}
-                              name="file"
-                              multiple
-                >
-                    <div className="drag-area">
-                        <div className="uploadImage">
-                            <img src={uploadImage} alt=""/>
-                        </div>
-                        <header>Drag & Drop or click to Upload File</header>
-                    </div>
-                </FileUploader>
-                <div className='preview-block'>
-                    {preview.map((item, pos) =>
-                        <div className='preview-image-card'>
-                            <div className='preview-image'>
-                                <img src={item} key={pos} alt=""/>
-                            </div>
-                            <div className='delete-icon'>
-                                <ClearIcon/>
-                            </div>
-                        </div>
-                    )}
-                </div>
+                <UploadPhoto/>
             </div>
-            <Button variant='contained' color='primary' type='submit'
-            >create</Button>
+            <Button className='create-post-button' variant='contained' color='primary' type='submit'>create</Button>
         </form>
     )
 }

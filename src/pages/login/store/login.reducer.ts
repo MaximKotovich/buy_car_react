@@ -3,7 +3,8 @@ import {getToken} from "../utils/token.service";
 
 
 const initialState = {
-    user: getToken()?.login,
+    user: 'Maxim',
+    // getToken()?.login,
     loading: false,
     isOpen: false
 }
